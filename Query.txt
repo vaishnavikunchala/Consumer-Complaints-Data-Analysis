@@ -1,0 +1,129 @@
+DROP TABLE IF EXISTS CC;
+CREATE EXTERNAL TABLE CC (DateReceived string, 
+Product string, SubProduct string, Issue string,  SubIssue string, 
+Consumercomplaint string, Companypublicresponse string, Company string, 
+State string,ZIPcode string, Tags string, Consumerconsent string, 
+Submittedvia string, Datesent string, Companyresponse string, 
+Timelyresponse string, Consumerdisputed string, ComplaintID string)
+
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE;
+
+
+LOAD DATA INPATH 'wasb://khushbu-1@jolly.blob.core.windows.net/Consumer_Complaints.csv/' 
+OVERWRITE INTO TABLE CC;
+
+
+State Query
+DROP TABLE IF Exists CCS;
+CREATE TABLE CCS AS
+SELECT  State, COUNT(State)
+FROM CC
+GROUP BY State;
+
+
+
+Product Query
+DROP TABLE IF EXISTS CCP;
+CREATE TABLE CCP AS
+SELECT Product, COUNT(Product)
+FROM CC
+GROUP BY Product;
+
+
+
+Company Query
+DROP TABLE IF EXISTS CCC;
+CREATE TABLE CCC AS
+SELECT Company, COUNT(Company)
+FROM CC
+GROUP BY Company;
+
+
+Issue Query
+DROP TABLE IF EXISTS CCIM;
+CREATE TABLE CCIM AS
+SELECT Issue, COUNT(Issue)
+FROM CC
+WHERE Product = 'Mortgage'
+GROUP BY Issue;
+
+
+DROP TABLE IF EXISTS CCIDC;
+CREATE TABLE CCIDC AS
+SELECT Issue, COUNT(Issue)
+FROM CC
+WHERE Product = 'Debt collection'
+GROUP BY Issue;
+
+
+DROP TABLE IF EXISTS CCICR;
+CREATE TABLE CCICR AS
+SELECT Issue, COUNT(Issue)
+FROM CC
+WHERE Product = 'Credit reporting'
+GROUP BY Issue;
+
+
+DROP TABLE IF EXISTS CCICC;
+CREATE TABLE CCICC AS
+SELECT Issue, COUNT(Issue)
+FROM CC
+WHERE Product = 'Credit card'
+GROUP BY Issue;
+
+
+
+DROP TABLE IF EXISTS CCIBAS;
+CREATE TABLE CCIBAS AS
+SELECT Issue, COUNT(Issue)
+FROM CC
+WHERE Product = 'Bank account or service'
+GROUP BY Issue;
+
+
+
+
+
+
+
+
+Daterecieved Query
+DROP TABLE IF EXISTS CCY;
+CREATE TABLE CCY AS
+SELECT Datereceived, COUNT(Daterecieved)
+FROM CC
+GROUP BY Daterecieved;
+
+
+
+
+TimelyResponse Query
+DROP TABLE IF EXISTS CCTR;
+CREATE TABLE CCTR AS
+SELECT Timelyresponse, COUNT(Timelyresponse)
+FROM CC
+GROUP BY Timelyresponse;
+
+
+
+Submittedvia Query
+DROP TABLE IF Exists CCSV;
+CREATE TABLE CCSV AS
+SELECT  Submittedvia, COUNT(Submittedvia)
+FROM CC
+GROUP BY Submittedvia;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
