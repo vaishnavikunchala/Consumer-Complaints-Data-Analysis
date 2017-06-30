@@ -1,1 +1,2 @@
-# CIS520
+CONSUMER COMPLAINTS DATA ANALYSIS
+Each week, the thousands of consumer's complaints about financial protection, services or crash databases of banks are submitted to companies for response. Every complaint provides insight into problems that people are experiencing, helping us identifying inappropriate practices and allowing us to stop them before they become major issues. The data analysis highlights how text mining analysis can help unlock the wealth of information contained in consumer complaint databases.
